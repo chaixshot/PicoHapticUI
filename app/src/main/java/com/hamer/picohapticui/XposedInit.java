@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 
 import com.bytedance.osui.utils.OSUIHelper;
+import com.hamer.picohapticui.chromium.ChromiumHapticHelper;
+import com.hamer.picohapticui.firefox.GeckoViewHapticHelper;
 import com.hamer.picohapticui.haptic.HapticManager;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
@@ -63,6 +65,12 @@ public class XposedInit implements IXposedHookLoadPackage {
 
         // Hook Jetpack Compose if present
         hookComposeIfPresent(lpparam);
+
+        // Install Firefox WebPage Haptic Hooks
+        GeckoViewHapticHelper.installHooks(lpparam);
+
+        // Install Chromium WebPage Haptic Hooks
+        ChromiumHapticHelper.installHooks(lpparam);
     }
 
     private void hookViewSystem(XC_LoadPackage.LoadPackageParam lpparam) {
